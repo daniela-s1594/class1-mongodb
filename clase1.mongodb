@@ -1,0 +1,45 @@
+show dbs;
+//create database
+use db_producto;
+//show colletion
+db.productos.find();
+//collections are tables 
+db.createColletion('productos');
+//Insert register
+db.productos.insertOne({'nombre':'arroz','precio': 1000,'descripcion':'Aproveche que esta regalado'});
+//Insert one more register
+db.productos.insertOne({'nombre':'papa','precio': 2000,'descripcion':'El precio subio','cantidad':2,'unidad':'Kg'});
+//Another way to insert
+db.productos.insertMany([{'nombre':'carne','precio':15000,'estado':'activo'}]);
+
+//Exercise: create colletion Categoria and insert five registers
+db.categoria.find();
+db.createColletion('Categoria');
+
+db.categoria.insertMany([
+  {'nombre':'Verduras',
+  'caracteristicas':'Son ricas en vitaminas'}
+  ,
+  {'nombre':'Frutas',
+  'caracteristicas':'Son ricas en vitaminas'}
+  ,
+  {'nombre':'Proteinas',
+  'caracteristicas':'Para tener una buena alimentación'}
+  ,
+  {'nombre':'Lacteos',
+  'caracteristicas':'Todo que tenga que ver con un derivado de leche'}
+  ,
+  {'nombre':'Granos',
+  'caracteristicas':'Granos o legumbres, es lo mismo'}
+]);
+
+
+//update registers (one)
+db.productos.update({'nombre':'carne'},{$set:{'nombre':'pollo'}});
+
+//update registers (all)
+db.productos.update({},{$set:{'nombre':'pollo'}});
+//delete register (one)
+db.productos.deleteOne({_id:(ObjectId("64dac61976ffe2c240c275bb"))});
+//delete register (all),use something else diferent to id because it is unique
+db.productos.deleteMany({nombre:('papa')});
